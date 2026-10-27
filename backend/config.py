@@ -15,7 +15,11 @@ app = Flask(__name__,
             static_folder=os.path.join(BASE_DIR, 'static'))
 
 app.secret_key = os.urandom(24)
-app.config['SOCKETIO_ASYNC_MODE'] = 'threading'
+# Ubah baris ini:
+# app.config['SOCKETIO_ASYNC_MODE'] = 'threading'
+
+# Jadi paksa pakai gevent di constructor:
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode='gevent')
 
 # 3. Perbaiki path database agar tidak error
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(BASE_DIR, 'instance', 'users.db')
