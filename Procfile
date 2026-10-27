@@ -1,1 +1,1 @@
-web: gunicorn --chdir backend app:app
+web: gunicorn -k eventlet --chdir backend app:app
