@@ -1,3 +1,6 @@
+# language: Python, file: app.py, target: Railway / Gunicorn + Eventlet
+import eventlet
+eventlet.monkey_patch()
 
 from config import app, socketio
 import admin_panel
@@ -44,5 +47,6 @@ def set_no_cache(response):
 def inject_version():
     return dict(html_version=app.config['HTML_VERSION'])
 
+# Blok ini HANYA untuk run lokal. Gunicorn di Railway akan mengabaikan ini.
 if __name__ == '__main__':
     socketio.run(app, host='0.0.0.0', port=8888, debug=True, allow_unsafe_werkzeug=True)
