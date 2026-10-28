@@ -82,3 +82,16 @@ def init_db():
         db.create_all()
         
 init_db()
+
+def make_admin():
+    username = os.environ.get("ADMIN_USERNAME")
+    if not username:
+        return
+    with app.app_context():
+        u = User.query.filter_by(username=username).first()
+        if u:
+            u.admin = True
+            u.seller = True
+            db.session.commit()
+
+make_admin()
