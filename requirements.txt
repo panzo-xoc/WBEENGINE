@@ -2,4 +2,7 @@ Flask
 Flask-SocketIO
 gunicorn==23.0.0
 gevent
+gevent-websocket
 pyTelegramBotAPI
+Flask-SQLAlchemy
+requests
