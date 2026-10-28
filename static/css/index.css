@@ -378,13 +378,6 @@
 /* ===================== HP ===================== */
 @media screen and (max-width:767px) {
 
-    /* jarak kiri-kanan supaya konten tidak nempel tepi layar */
-    .reviews__content,
-    .sellers__content {
-        padding-left: 16px;
-        padding-right: 16px;
-    }
-
     /* HERO */
     .page__container {
         height: 100vh;
@@ -503,6 +496,11 @@
     .seller__item__information {
         gap: 14px;
     }
+    .seller__item__information__name__status {
+        height: auto;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
     .seller__item__information .avatar__container {
         width: 48px;
         height: 48px;
@@ -518,5 +516,55 @@
     .seller__item:hover {
         border: 1px solid var(--border);
         outline: 0;
+    }
+}
+
+/* ===================== ANIMASI HALAMAN ===================== */
+@media (prefers-reduced-motion: no-preference) {
+
+    .page__container::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: min(700px, 90vw);
+        height: min(700px, 90vw);
+        transform: translate(-50%, -50%);
+        background: radial-gradient(circle, rgba(156,251,39,.18) 0%, transparent 65%);
+        pointer-events: none;
+        animation: glowPulse 6s ease-in-out infinite;
+    }
+
+    .page__container .title {
+        text-shadow: 0 0 40px rgba(156,251,39,.25);
+        animation: fadeUp .9s cubic-bezier(.2,.7,.2,1) backwards;
+    }
+    .page__container .description {
+        animation: fadeUp .9s .15s cubic-bezier(.2,.7,.2,1) backwards;
+    }
+    .page__container .animated-button {
+        animation: fadeUp .9s .3s cubic-bezier(.2,.7,.2,1) backwards;
+    }
+
+    .statistic__item {
+        animation: fadeUp .8s cubic-bezier(.2,.7,.2,1) backwards;
+    }
+    .statistic__item:nth-child(1) { animation-delay: .5s; }
+    .statistic__item:nth-child(2) { animation-delay: .62s; }
+    .statistic__item:nth-child(3) { animation-delay: .74s; }
+    .statistic__item:nth-child(4) { animation-delay: .86s; }
+
+    .reveal {
+        opacity: 0;
+    }
+    .reveal.in {
+        opacity: 1;
+        animation: fadeUp .8s cubic-bezier(.2,.7,.2,1) backwards;
+    }
+}
+
+@media (hover: hover) {
+    .seller__item:hover {
+        transform: translateY(-4px);
     }
 }
