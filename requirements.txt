@@ -6,4 +6,5 @@ gevent-websocket
 pyTelegramBotAPI
 Flask-SQLAlchemy
 Flask-Migrate
+Flask-Admin
 requests
