@@ -1,4 +1,3 @@
-
 .page__container {
     width: 100%;
     height: calc(100vh - 80px);
@@ -317,7 +316,6 @@
 }
 
 .seller__item__information__name__and__products .description {
-
     font-size: 13px;
     color: var(--text);
     font-weight: 500;
@@ -344,7 +342,6 @@
     color: var(--accent);
     display: flex;
     align-items: center;
-
 }
 
 .seller__item__image__preview {
@@ -368,6 +365,7 @@
     object-position: center;
 }
 
+/* ===================== TABLET ===================== */
 @media screen and (min-width:767px) and (max-width:1200px) {
     .page__container .title {
         font-size: 60px;
@@ -377,9 +375,22 @@
     }
 }
 
+/* ===================== HP ===================== */
 @media screen and (max-width:767px) {
+
+    /* jarak kiri-kanan supaya konten tidak nempel tepi layar */
+    .reviews__content,
+    .sellers__content {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    /* HERO */
     .page__container {
         height: 100vh;
+        height: 100dvh;
+        min-height: 520px;
+        padding: 0 16px;
         gap: 20px;
         background-size: cover;
     }
@@ -387,47 +398,125 @@
         background-size: cover;
     }
     .page__container .title {
-        font-size: 40px;
-        max-width: var(--containers-max-width);
+        font-size: clamp(26px, 8vw, 40px);
+        line-height: 1.2;
+        word-break: break-word;
+        max-width: 100%;
         text-align: center;
     }
     .page__container .description {
-        display: none;
+        display: block;
+        font-size: 15px;
+        line-height: 24px;
+        max-width: 100%;
+    }
+
+    /* STATISTIK: grid 2 kolom */
+    .statistic__container {
+        height: auto;
+    }
+    .statistic__content {
+        transform: none;
+        margin: -30px 16px 0;
+        padding: 20px 16px;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px 12px;
+    }
+    .statistic__item {
+        gap: 12px;
+        justify-content: flex-start;
+        scale: 1;
+    }
+    .statistic__item img {
+        width: 32px;
+        height: 32px;
     }
     .statistic__item__text {
-        display: none;
+        display: flex;
     }
+    .statistic__item__text .title {
+        font-size: 13px;
+    }
+    .statistic__item__text .description {
+        font-size: 11px;
+        white-space: normal;
+    }
+
+    /* NOTE */
     .note__container {
-        height: 400px;
+        height: auto;
+        padding: 80px 16px;
+        gap: 24px;
     }
     .note__container .title {
-        font-size: 40px;
+        font-size: 28px;
         text-align: center;
+        line-height: 1.25;
     }
+    .note__container .description {
+        font-size: 15px;
+        line-height: 24px;
+    }
+
+    /* REVIEWS */
     .reviews__content {
-        gap: 15px;
+        gap: 24px;
+    }
+    .reviews__content .title-description {
+        font-size: 15px;
+        line-height: 24px;
     }
     .reviews__items__container {
         display: flex;
         flex-direction: column;
+        gap: 16px;
+    }
+    .reviews__item__header,
+    .reviews__item__bottom {
+        padding: 16px;
     }
     .reviews__item__bottom__customer .description {
         display: none;
     }
     .reviews__item__bottom__stars {
-        gap: 5px;
+        gap: 4px;
         justify-content: flex-end;
     }
     .reviews__item__bottom__stars img {
-        scale: 0.5;
+        scale: 1;
+        width: 18px;
+        height: 18px;
     }
+
+    /* SELLERS */
     .sellers__content {
-        gap: 25px;
+        gap: 24px;
+    }
+    .seller__item {
+        padding: 16px;
+        gap: 16px;
     }
     .seller__item .title {
         line-height: 20px;
     }
+    .seller__item__information {
+        gap: 14px;
+    }
+    .seller__item__information .avatar__container {
+        width: 48px;
+        height: 48px;
+        flex-shrink: 0;
+    }
     .seller__item__image__preview {
         display: none;
+    }
+}
+
+/* hover outline dimatikan di layar sentuh */
+@media (hover: none) {
+    .seller__item:hover {
+        border: 1px solid var(--border);
+        outline: 0;
     }
 }
