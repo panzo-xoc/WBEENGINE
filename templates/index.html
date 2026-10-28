@@ -138,6 +138,53 @@
 
 {% block script %}
 
-    
+<script>
+(function () {
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    // angka statistik menghitung naik dari 0
+    function fmt(n) { return String(n).replace(/\B(?=(\d{3})+(?!\d))/g, '.'); }
+    function countUp(el) {
+        var m = el.textContent.trim().match(/^([\d.]+)(\+?)$/);
+        if (!m) return;
+        var target = parseInt(m[1].replace(/\./g, ''), 10);
+        var suffix = m[2];
+        el.textContent = '0' + suffix;
+        setTimeout(function () {
+            var t0 = performance.now();
+            function tick(now) {
+                var p = Math.min((now - t0) / 1600, 1);
+                var e = 1 - Math.pow(1 - p, 3);
+                el.textContent = fmt(Math.round(target * e)) + suffix;
+                if (p < 1) requestAnimationFrame(tick);
+            }
+            requestAnimationFrame(tick);
+        }, 700);
+    }
+    document.querySelectorAll('.statistic__item__text .title').forEach(countUp);
+
+    // elemen muncul saat masuk layar
+    if (!('IntersectionObserver' in window)) return;
+    var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+            if (en.isIntersecting) {
+                en.target.classList.add('in');
+                io.unobserve(en.target);
+            }
+        });
+    }, { threshold: 0.12 });
+
+    var sel = '.note__container > *, .reviews__item, ' +
+              '.reviews__content > .title-description, ' +
+              '.reviews__content > .animated-button, ' +
+              '.sellers__content > .title, .seller__item';
+    document.querySelectorAll(sel).forEach(function (el) {
+        var idx = Array.prototype.indexOf.call(el.parentElement.children, el);
+        el.style.animationDelay = (idx % 3) * 90 + 'ms';
+        el.classList.add('reveal');
+        io.observe(el);
+    });
+})();
+</script>
 
 {% endblock %}
