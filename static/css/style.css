@@ -26,9 +26,9 @@
     --child: #0B0B0F;
     --child50: #0B0B0F50;
     --child95: #0B0B0F95;
-    --accent: #5B52D8;
-    --accent20: #5B52D820;
-    --accent-hover: #868AFF;
+    --accent: #9CFB27;
+    --accent20: #9CFB2720;
+    --accent-hover: #B8FF5E;
     --widget: #0F0F14;
     --light-widget: #15151C;
     --on-widget: #1A1A24;
@@ -575,4 +575,72 @@ body, html {
     .contact-button:hover {
         background-color: var(--text);
     }
+}
+
+/* ===================== ANIMASI GLOBAL ===================== */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideDown {
+    from { opacity: 0; transform: translateY(-100%); }
+    to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes glowPulse {
+    0%, 100% { opacity: .5; transform: translate(-50%, -50%) scale(1); }
+    50%      { opacity: 1;  transform: translate(-50%, -50%) scale(1.15); }
+}
+@keyframes bgDrift {
+    from { transform: translate3d(-3%, -2%, 0) scale(1); }
+    to   { transform: translate3d(3%, 3%, 0) scale(1.12); }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+    .titlebar__container {
+        animation: slideDown .7s cubic-bezier(.2,.7,.2,1) backwards;
+    }
+    body::before {
+        animation: bgDrift 22s ease-in-out infinite alternate;
+    }
+}
+
+/* ===================== BACKGROUND GRADIENT BLUR ===================== */
+body {
+    background: transparent;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: -20%;
+    z-index: -1;
+    pointer-events: none;
+    background:
+        radial-gradient(40% 40% at 18% 18%, rgba(156,251,39,.22), transparent 70%),
+        radial-gradient(35% 35% at 82% 28%, rgba(34,211,238,.13), transparent 70%),
+        radial-gradient(45% 45% at 60% 88%, rgba(156,251,39,.12), transparent 70%);
+    filter: blur(60px);
+    will-change: transform;
+}
+
+/* ===================== GLASS ===================== */
+.titlebar__container {
+    background-color: rgba(9,9,11,.55);
+    border-bottom: 1px solid rgba(255,255,255,.08);
+}
+
+.statistic__content,
+.reviews__item,
+.seller__item,
+.guarantee__item,
+.notify__message {
+    background: rgba(255,255,255,.04);
+    border: 1px solid rgba(255,255,255,.08);
+    backdrop-filter: blur(16px) saturate(140%);
+    -webkit-backdrop-filter: blur(16px) saturate(140%);
+    box-shadow: 0 8px 32px rgba(0,0,0,.25), inset 0 1px 0 rgba(255,255,255,.06);
+}
+
+.reviews__item__bottom {
+    background: rgba(255,255,255,.03);
 }
