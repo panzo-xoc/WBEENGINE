@@ -1,4 +1,3 @@
-
 * {
     margin: 0;
     padding: 0;
@@ -229,9 +228,15 @@ input:-webkit-autofill:active {
     }
 }
 
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
 body, html {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
+    height: 100dvh;
     background: var(--layout);
     display: block;
     overflow-x: hidden;
@@ -462,6 +467,7 @@ body, html {
     background-color: var(--accent);
 }
 
+/* ===================== TABLET ===================== */
 @media screen and (min-width:767px) and (max-width:1200px) {
     :root {
         --containers-max-width: 767px;
@@ -474,51 +480,99 @@ body, html {
     }
 }
 
+/* ===================== HP ===================== */
 @media screen and (max-width:767px) {
     :root {
         --containers-max-width: calc(100% - 30px);
         --padding75: 25px;
     }
+
+    /* TITLEBAR */
     .titlebar__item:first-child {
         display: none;
     }
-    #titlebar__site__button__text {
-        display: none;
+    .titlebar__item {
+        gap: 16px;
     }
-    #footer__text {
+    .titlebar__site__button {
+        gap: 12px;
+    }
+    .titlebar__button {
+        font-size: 12px;
+        white-space: nowrap;
+    }
+    .titlebar__profile__button {
+        gap: 10px;
+        font-size: 12px;
+        white-space: nowrap;
+    }
+    #titlebar__site__button__text {
         display: none;
     }
     #username {
         display: none;
     }
+
+    /* NOTIFIKASI: tidak keluar layar */
+    .notify {
+        top: 95px;
+        left: 15px;
+        right: 15px;
+        max-width: calc(100% - 30px);
+    }
+    .notify__message {
+        max-width: 100%;
+        padding: 12px;
+    }
+
+    /* TOMBOL ANIMASI: lebih kecil di HP */
+    .animated-button {
+        padding: 20px 34px;
+    }
+    .animated-button span {
+        font-size: 15px;
+    }
+
+    /* GUARANTEE */
     .guarantee__content {
         display: flex;
         flex-direction: column;
+        gap: 16px;
+    }
+    .guarantee__item {
+        padding: 20px;
+        gap: 16px;
+    }
+
+    /* FOOTER */
+    #footer__text {
+        display: none;
+    }
+    .footer__content {
+        gap: 12px;
+    }
+    .contact-button {
+        width: 28px;
+        height: 28px;
     }
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+/* Layar sentuh: matikan efek hover yang "nyangkut" setelah di-tap */
+@media (hover: none) {
+    .animated-button:hover {
+        background: var(--accent);
+        scale: 1;
+    }
+    .animated-button:hover span {
+        transform: none;
+    }
+    .animated-button:hover::after {
+        opacity: 0;
+    }
+    .titlebar__button:hover {
+        color: var(--text);
+    }
+    .contact-button:hover {
+        background-color: var(--text);
+    }
+}
